@@ -302,8 +302,22 @@
         </div>
 
         <div class="form-group">
-          <label for="prod-images">Image Asset Paths (comma separated)</label>
+          <label for="prod-images">Image / Video Asset Paths (comma separated)</label>
           <input type="text" id="prod-images" class="form-control" placeholder="assets/images/men/s1.webp" required>
+        </div>
+
+        <!-- Manual File Upload (Images & Videos) -->
+        <div class="form-group" style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.15);">
+          <label style="color: var(--primary); font-weight: 600; display: block; margin-bottom: 0.4rem;">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Upload Media File Manually (Image / Video)
+          </label>
+          <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+            <input type="file" id="manual-file-input" accept="image/*,video/*" class="form-control" style="max-width: 280px; padding: 0.4rem;">
+            <button type="button" id="upload-file-btn" class="btn-secondary" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;">
+              <i class="fa-solid fa-upload"></i> Upload to Server
+            </button>
+            <span id="upload-status-text" style="font-size: 0.85rem; color: #a1a1aa;"></span>
+          </div>
         </div>
 
         <div class="form-group">

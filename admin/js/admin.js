@@ -270,6 +270,60 @@ document.addEventListener('DOMContentLoaded', () => {
   closeProductModalBtn.addEventListener('click', () => productModal.style.display = 'none');
   cancelProductBtn.addEventListener('click', () => productModal.style.display = 'none');
 
+  // MANUAL FILE UPLOAD HANDLER (IMAGE & VIDEO)
+  const uploadFileBtn = document.getElementById('upload-file-btn');
+  const manualFileInput = document.getElementById('manual-file-input');
+  const uploadStatusText = document.getElementById('upload-status-text');
+
+  if (uploadFileBtn && manualFileInput) {
+    uploadFileBtn.addEventListener('click', async () => {
+      const file = manualFileInput.files[0];
+      if (!file) {
+        alert('Please select an image or video file first.');
+        return;
+      }
+
+      uploadStatusText.textContent = 'Uploading file...';
+      uploadStatusText.style.color = '#a1a1aa';
+      uploadFileBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      try {
+        const res = await fetch(`${API_BASE}/upload`, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          uploadStatusText.textContent = `✅ Uploaded (${data.fileType})!`;
+          uploadStatusText.style.color = '#10b981';
+
+          const prodImagesInput = document.getElementById('prod-images');
+          const currentVal = prodImagesInput.value.trim();
+          if (currentVal) {
+            prodImagesInput.value = `${currentVal}, ${data.filePath}`;
+          } else {
+            prodImagesInput.value = data.filePath;
+          }
+          manualFileInput.value = '';
+        } else {
+          uploadStatusText.textContent = '❌ Upload failed.';
+          uploadStatusText.style.color = '#ef4444';
+          alert(data.message || 'Upload failed.');
+        }
+      } catch (err) {
+        uploadStatusText.textContent = '❌ Network error.';
+        uploadStatusText.style.color = '#ef4444';
+        alert('File upload failed.');
+      } finally {
+        uploadFileBtn.disabled = false;
+      }
+    });
+  }
+
   productForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const isEdit = document.getElementById('prod-is-edit').value === 'true';
