@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FRIENDZ - Admin Portal</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <!-- LOGIN SECTION -->
+  <div id="login-section" class="login-wrapper">
+    <div class="login-card">
+      <div class="login-brand">
+        <h1>FRIENDZ ADMIN</h1>
+        <p>Sign in to manage catalog, orders & inquiries</p>
+      </div>
+
+      <div id="login-alert" class="alert alert-danger" style="display:none; color:#ef4444; margin-bottom:1rem; font-size:0.85rem; text-align:center;"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" class="form-control" placeholder="Enter admin username" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" class="form-control" placeholder="Enter password" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-primary" style="margin-top: 1.5rem;">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In to Dashboard
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD SECTION -->
+  <div id="dashboard-section" class="dashboard-container" style="display: none;">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <h2><i class="fa-solid fa-bag-shopping" style="color: var(--primary);"></i> FRIENDZ</h2>
+      </div>
+
+      <ul class="sidebar-menu">
+        <li>
+          <a href="#overview" class="nav-link active" data-tab="overview">
+            <i class="fa-solid fa-chart-pie"></i> Overview
+          </a>
+        </li>
+        <li>
+          <a href="#products" class="nav-link" data-tab="products">
+            <i class="fa-solid fa-shirt"></i> Products Catalog
+          </a>
+        </li>
+        <li>
+          <a href="#orders" class="nav-link" data-tab="orders">
+            <i class="fa-solid fa-box"></i> Customer Orders
+          </a>
+        </li>
+        <li>
+          <a href="#contact" class="nav-link" data-tab="contact">
+            <i class="fa-solid fa-envelope"></i> Contact Messages
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <button id="logout-btn" class="btn-secondary" style="width: 100%;">
+          <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      
+      <div class="top-bar">
+        <div class="page-title">
+          <h2 id="tab-title">Dashboard Overview</h2>
+          <p id="tab-subtitle">Real-time store metrics & management</p>
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <a href="/" target="_blank" class="btn-secondary" style="text-decoration:none; font-size:0.85rem;">
+            <i class="fa-solid fa-globe"></i> View Live Store
+          </a>
+        </div>
+      </div>
+
+      <!-- OVERVIEW TAB -->
+      <div id="tab-content-overview" class="tab-pane">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-shirt"></i></div>
+            <div class="stat-info">
+              <h4>Total Products</h4>
+              <div class="stat-value" id="stat-products-count">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(16,185,129,0.15); color: #10b981;"><i class="fa-solid fa-cart-shopping"></i></div>
+            <div class="stat-info">
+              <h4>Total Orders</h4>
+              <div class="stat-value" id="stat-orders-count">0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(245,158,11,0.15); color: #f59e0b;"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            <div class="stat-info">
+              <h4>Est. Sales Revenue</h4>
+              <div class="stat-value" id="stat-revenue">₹0</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(59,130,246,0.15); color: #3b82f6;"><i class="fa-solid fa-envelope"></i></div>
+            <div class="stat-info">
+              <h4>Inquiries</h4>
+              <div class="stat-value" id="stat-messages-count">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-card">
+          <div class="card-header">
+            <h3>Recent Orders</h3>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order Ref</th>
+                  <th>Customer Name</th>
+                  <th>Phone</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="overview-recent-orders">
+                <tr><td colspan="6" style="text-align:center;">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS TAB -->
+      <div id="tab-content-products" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header">
+            <h3>Products Inventory</h3>
+            <button id="open-add-product-btn" class="btn-primary" style="width: auto; padding: 0.6rem 1.25rem;">
+              <i class="fa-solid fa-plus"></i> Add New Product
+            </button>
+          </div>
+          
+          <div style="margin-bottom: 1.25rem; display: flex; gap: 1rem;">
+            <input type="text" id="product-search-input" class="form-control" placeholder="Search product name, ID, or category..." style="max-width: 350px;">
+          </div>
+
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Featured</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="products-table-body">
+                <tr><td colspan="7" style="text-align:center;">Loading products...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ORDERS TAB -->
+      <div id="tab-content-orders" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header">
+            <h3>Customer Orders Management</h3>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Customer</th>
+                  <th>Phone & Address</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Fulfillment Status</th>
+                </tr>
+              </thead>
+              <tbody id="orders-table-body">
+                <tr><td colspan="6" style="text-align:center;">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONTACT MESSAGES TAB -->
+      <div id="tab-content-contact" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header">
+            <h3>Customer Inquiries & Feedback</h3>
+          </div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Email & Phone</th>
+                  <th>Message</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="contact-table-body">
+                <tr><td colspan="5" style="text-align:center;">Loading messages...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+  <div id="product-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-product-title">Add New Product</h3>
+        <button id="close-product-modal" class="modal-close">&times;</button>
+      </div>
+      
+      <form id="product-form">
+        <input type="hidden" id="prod-is-edit" value="false">
+        
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="prod-id">Product Code / ID</label>
+            <input type="text" id="prod-id" class="form-control" placeholder="e.g. FR-MEN-07" required>
+          </div>
+          <div class="form-group">
+            <label for="prod-name">Product Name</label>
+            <input type="text" id="prod-name" class="form-control" placeholder="e.g. Classic Linen Shirt" required>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="prod-gender">Gender / Category Type</label>
+            <select id="prod-gender" class="form-control" required>
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+              <option value="kids">Kids</option>
+              <option value="sandals">Footwear / Sandals</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="prod-category">Category Name</label>
+            <input type="text" id="prod-category" class="form-control" placeholder="e.g. Shirts, Kurtis, Boys">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="prod-price">Price (₹)</label>
+            <input type="number" id="prod-price" class="form-control" placeholder="1999" required min="0">
+          </div>
+          <div class="form-group">
+            <label for="prod-collection">Collection</label>
+            <input type="text" id="prod-collection" class="form-control" placeholder="Modern Classics, Casual Wear">
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group">
+            <label for="prod-sizes">Sizes (comma separated)</label>
+            <input type="text" id="prod-sizes" class="form-control" placeholder="S, M, L, XL">
+          </div>
+          <div class="form-group">
+            <label for="prod-colors">Colors (comma separated)</label>
+            <input type="text" id="prod-colors" class="form-control" placeholder="Navy, Off-White">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="prod-material">Material & Fabric</label>
+          <input type="text" id="prod-material" class="form-control" placeholder="100% Pure Organic Cotton">
+        </div>
+
+        <div class="form-group">
+          <label for="prod-images">Image Asset Paths (comma separated)</label>
+          <input type="text" id="prod-images" class="form-control" placeholder="assets/images/men/s1.webp" required>
+        </div>
+
+        <div class="form-group">
+          <label for="prod-description">Product Description</label>
+          <textarea id="prod-description" class="form-control" placeholder="Enter product features and description..."></textarea>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-top:0.5rem;">
+            <input type="checkbox" id="prod-featured" style="width: 18px; height: 18px;">
+            <label for="prod-featured" style="margin:0; cursor:pointer;">Featured Product</label>
+          </div>
+          <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-top:0.5rem;">
+            <input type="checkbox" id="prod-newArrival" style="width: 18px; height: 18px;">
+            <label for="prod-newArrival" style="margin:0; cursor:pointer;">New Arrival</label>
+          </div>
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem;">
+          <button type="button" id="cancel-product-btn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary" style="width:auto; padding:0.75rem 1.5rem;">Save Product</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

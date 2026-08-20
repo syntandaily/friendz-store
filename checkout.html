@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="assets/images/logo/logo.png">
+  <title>Checkout | FRIENDZ</title>
+  <meta name="description" content="Review your FRIENDZ cart and submit your order on WhatsApp.">
+  <link rel="stylesheet" href="assets/css/style.css?v=5">
+<link rel="stylesheet" href="assets/css/responsive.css?v=6">
+</head>
+<body>
+  <header class="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo" aria-label="Friendz Homepage">FRIENDZ</a>
+      <nav class="desktop-nav" aria-label="Main navigation"><a href="index.html" class="nav-link">Home</a><a href="men.html" class="nav-link">Men</a><a href="women.html" class="nav-link">Women</a><a href="kids.html" class="nav-link">Kids</a><a href="sandals.html" class="nav-link">FOOTWEAR</a></nav>
+      <div class="right-nav-tools"><a href="checkout.html" class="cart-link" aria-label="View shopping cart"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span class="sr-only">Cart</span><span class="cart-count" hidden>0</span></a><a href="contact.html" class="btn-contact-nav">Contact</a></div>
+    </div>
+  </header>
+
+  <main class="checkout-page">
+    <div class="container">
+      <div class="checkout-heading"><span class="section-subtitle">Secure order request</span><h1 class="editorial-title">Your Cart</h1><p>Review your selections, then send your order securely through WhatsApp for confirmation.</p></div>
+      <div class="checkout-grid">
+        <section class="checkout-card" aria-labelledby="order-summary-title"><h2 id="order-summary-title">Order Summary</h2><ul id="order-items" class="order-items"></ul><p id="cart-empty" class="cart-empty">Your cart is empty. <a href="index.html">Continue shopping</a></p><div class="order-total"><span>Estimated total</span><strong id="order-total">₹0</strong></div></section>
+        <section class="checkout-card" aria-labelledby="delivery-details-title"><h2 id="delivery-details-title">Delivery Details</h2><form id="checkout-form" class="checkout-form"><label>Full name<input name="name" autocomplete="name" required></label><label>Phone number<input name="phone" type="tel" inputmode="tel" autocomplete="tel" pattern="[0-9+ ]{10,15}" required></label><label>Full address<textarea name="address" autocomplete="street-address" rows="3" required></textarea></label><label>Nearby landmark <span>(optional)</span><input name="landmark"></label><label>Pincode<input name="pincode" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{6}" required></label><label>Order note <span>(optional)</span><textarea name="note" rows="2" placeholder="Size, colour, or delivery preference"></textarea></label><button class="whatsapp-order-btn" type="submit">Submit Order on WhatsApp</button><p class="checkout-note">Submitting opens WhatsApp with your order details. FRIENDZ will confirm availability and final payment with you.</p></form></section>
+      </div>
+    </div>
+  </main>
+  <script src="assets/js/products.js"></script>
+  <script src="assets/js/cart.js"></script>
+  <script src="assets/js/checkout.js"></script>
+</body>
+</html>
