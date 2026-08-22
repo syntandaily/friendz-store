@@ -93,20 +93,27 @@ router.get('/:id', async (req, res) => {
 // POST /api/products - Create Product (Admin Only)
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const {
+    let {
       id, name, category, gender, kidGender, price,
       sizes, colors, material, description, images,
       featured, newArrival, collection, stock
     } = req.body;
 
-    if (!id || !name || !price || !gender) {
-      return res.status(400).json({ success: false, message: 'Missing required product fields (id, name, price, gender).' });
+    if (!name || !price || !gender) {
+      return res.status(400).json({ success: false, message: 'Missing required product fields (name, price, gender).' });
+    }
+
+    if (!id || !id.trim()) {
+      id = `FR-PROD-${Date.now().toString(36).toUpperCase()}-${Math.floor(100 + Math.random() * 900)}`;
+    } else {
+      id = id.trim();
     }
 
     const existing = await dbQuery.get('SELECT id FROM products WHERE id = ?', [id]);
     if (existing) {
       return res.status(400).json({ success: false, message: `Product ID "${id}" already exists.` });
     }
+
 
     await dbQuery.run(
       `INSERT INTO products (

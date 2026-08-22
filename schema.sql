@@ -94,3 +94,15 @@ CREATE TABLE IF NOT EXISTS `admins` (
 INSERT INTO `admins` (`username`, `password_hash`)
 SELECT 'admin', '$2a$10$96xP3gY9QfU1V92N4G6Lve0D.W2m81uW4.4O8O940y9X8449494'
 WHERE NOT EXISTS (SELECT `id` FROM `admins` WHERE `username` = 'admin');
+
+-- ------------------------------------------------------------
+-- 6. PRODUCT ATTRIBUTES TABLE
+-- Stores dynamic attributes (gender, category, collection, size, color, material)
+-- ------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `product_attributes` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `type` VARCHAR(50) NOT NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+

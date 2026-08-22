@@ -3,66 +3,74 @@
 /* Large screens (up to 1920px) */
 @media (min-width: 1441px) {
   .container {
-    padding: 0 6rem;
+    padding: 0 5rem;
   }
 }
 
-/* Standard desktop & laptops (up to 1200px) */
-@media (max-width: 1200px) {
+/* Widescreens & standard desktops (1201px to 1440px) */
+@media (max-width: 1440px) {
   .container {
-    padding: 0 3rem;
+    padding: 0 2.5rem;
   }
-  
-  .category-grid {
-    gap: 1.5rem;
-  }
-  
-  .category-card {
-    height: 500px;
-    padding: 2rem 1.5rem;
-  }
-  
-  .product-grid {
-    gap: 2rem 1.5rem;
-  }
-  
-  .about-grid {
-    gap: 4rem;
-  }
-}
 
-/* Small laptops / Tablets in landscape (up to 1024px) */
-@media (max-width: 1024px) {
-  :root {
-    --header-height: 70px;
-  }
-  
   .desktop-nav {
-    gap: 1.5rem;
+    gap: 1.2rem;
   }
-  
+
   .nav-link {
     font-size: 0.75rem;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
   }
-  
+
+  .right-nav-tools {
+    gap: 0.85rem;
+  }
+
+  .btn-contact-nav {
+    padding: 7px 12px;
+    font-size: 0.68rem;
+  }
+}
+
+/* Laptops, Tablets & Mobile (up to 1200px) - Switch to sleek drawer navigation */
+@media (max-width: 1200px) {
+  :root {
+    --header-height: 65px;
+  }
+
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Hide Desktop Nav, Show Hamburger */
+  .desktop-nav, 
+  .right-nav-tools .btn-contact-nav {
+    display: none !important;
+  }
+
+  .menu-btn {
+    display: flex !important;
+    width: 22px;
+    height: 15px;
+  }
+
   .right-nav-tools {
     gap: 1rem;
   }
-  
+
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .product-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .catalog-layout {
     grid-template-columns: 220px 1fr;
     gap: 2rem;
   }
-  
+
   .product-modal-wrapper {
     max-width: 90%;
     grid-template-columns: 1fr 1fr;
@@ -103,17 +111,6 @@
     bottom: -5px;
     left: 48px;
     font-size: .42rem;
-  }
-
-  /* Hide Desktop Nav, Show Hamburger */
-  .desktop-nav, .right-nav-tools .btn-contact-nav {
-    display: none;
-  }
-
-  .menu-btn {
-    display: flex;
-    width: 21px;
-    height: 15px;
   }
 
   /* Hero section adjustments */

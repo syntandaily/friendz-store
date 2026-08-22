@@ -193,6 +193,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  gap: 1.5rem;
 }
 
 .logo {
@@ -205,6 +206,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   display: inline-block;
   min-height: 58px;
   padding: 7px 0 0 68px;
+  flex-shrink: 0;
 }
 
 .logo::before {
@@ -234,18 +236,20 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 2.2rem;
+  gap: 1.4rem;
+  flex-shrink: 1;
 }
 
 .nav-link {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 8px 0;
   color: var(--text-primary);
   opacity: 0.75;
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -271,7 +275,8 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .right-nav-tools {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
 .search-trigger {
@@ -293,16 +298,20 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 }
 
 .btn-contact-nav {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   border: 1px solid var(--text-primary);
-  padding: 10px 20px;
+  padding: 8px 15px;
   border-radius: 0;
   transition: var(--transition-smooth);
   background: transparent;
   color: var(--text-primary);
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-contact-nav:hover {

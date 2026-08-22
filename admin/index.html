@@ -46,16 +46,59 @@
       </div>
 
       <ul class="sidebar-menu">
+        <li class="sidebar-category">Main</li>
         <li>
           <a href="#overview" class="nav-link active" data-tab="overview">
-            <i class="fa-solid fa-chart-pie"></i> Overview
+            <i class="fa-solid fa-chart-line"></i> Dashboard Overview
+          </a>
+        </li>
+
+        <li class="sidebar-category">Products Management</li>
+        <li>
+          <a href="#products" class="nav-link" data-tab="products">
+            <i class="fa-solid fa-boxes-stacked"></i> Products Inventory
           </a>
         </li>
         <li>
-          <a href="#products" class="nav-link" data-tab="products">
-            <i class="fa-solid fa-shirt"></i> Products Catalog
+          <a href="#add-product" class="nav-link sub-nav-link" data-tab="add-product">
+            <i class="fa-solid fa-square-plus"></i> Add New Product
           </a>
         </li>
+
+
+        <li class="sidebar-category">Master Attributes</li>
+        <li>
+          <a href="#attr-gender" class="nav-link sub-nav-link" data-tab="attr-gender">
+            <i class="fa-solid fa-venus-mars"></i> Gender Types
+          </a>
+        </li>
+        <li>
+          <a href="#attr-category" class="nav-link sub-nav-link" data-tab="attr-category">
+            <i class="fa-solid fa-tags"></i> Categories
+          </a>
+        </li>
+        <li>
+          <a href="#attr-collection" class="nav-link sub-nav-link" data-tab="attr-collection">
+            <i class="fa-solid fa-layer-group"></i> Collections
+          </a>
+        </li>
+        <li>
+          <a href="#attr-size" class="nav-link sub-nav-link" data-tab="attr-size">
+            <i class="fa-solid fa-ruler-combined"></i> Sizes
+          </a>
+        </li>
+        <li>
+          <a href="#attr-color" class="nav-link sub-nav-link" data-tab="attr-color">
+            <i class="fa-solid fa-palette"></i> Colors
+          </a>
+        </li>
+        <li>
+          <a href="#attr-material" class="nav-link sub-nav-link" data-tab="attr-material">
+            <i class="fa-solid fa-feather-pointed"></i> Materials & Fabrics
+          </a>
+        </li>
+
+        <li class="sidebar-category">Store Management</li>
         <li>
           <a href="#orders" class="nav-link" data-tab="orders">
             <i class="fa-solid fa-box"></i> Customer Orders
@@ -67,6 +110,8 @@
           </a>
         </li>
       </ul>
+
+
 
       <div class="sidebar-footer">
         <button id="logout-btn" class="btn-secondary" style="width: 100%;">
@@ -92,40 +137,56 @@
 
       <!-- OVERVIEW TAB -->
       <div id="tab-content-overview" class="tab-pane">
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-icon"><i class="fa-solid fa-shirt"></i></div>
+        <!-- STATS METRICS GRID -->
+        <div class="stats-grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; margin-bottom: 1.75rem;">
+          <div class="stat-card" style="display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;">
+            <div class="stat-icon" style="width: 52px; height: 52px; border-radius: 12px; background: rgba(99, 102, 241, 0.15); color: #6366f1; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+              <i class="fa-solid fa-box-archive"></i>
+            </div>
             <div class="stat-info">
-              <h4>Total Products</h4>
-              <div class="stat-value" id="stat-products-count">0</div>
+              <h4 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Total Products</h4>
+              <div class="stat-value" id="stat-products-count" style="font-size: 1.6rem; font-weight: 700; color: var(--text-main);">0</div>
+              <div style="font-size: 0.75rem; color: #10b981; margin-top: 0.2rem;"><i class="fa-solid fa-tags"></i> Active Catalog</div>
             </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(16,185,129,0.15); color: #10b981;"><i class="fa-solid fa-cart-shopping"></i></div>
+
+          <div class="stat-card" style="display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;">
+            <div class="stat-icon" style="width: 52px; height: 52px; border-radius: 12px; background: rgba(16, 185, 129, 0.15); color: #10b981; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
             <div class="stat-info">
-              <h4>Total Orders</h4>
-              <div class="stat-value" id="stat-orders-count">0</div>
+              <h4 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Total Orders</h4>
+              <div class="stat-value" id="stat-orders-count" style="font-size: 1.6rem; font-weight: 700; color: var(--text-main);">0</div>
+              <div id="stat-pending-orders" style="font-size: 0.75rem; color: #f59e0b; margin-top: 0.2rem;"><i class="fa-solid fa-clock"></i> 0 Pending</div>
             </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(245,158,11,0.15); color: #f59e0b;"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+
+          <div class="stat-card" style="display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;">
+            <div class="stat-icon" style="width: 52px; height: 52px; border-radius: 12px; background: rgba(245, 158, 11, 0.15); color: #f59e0b; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+              <i class="fa-solid fa-indian-rupee-sign"></i>
+            </div>
             <div class="stat-info">
-              <h4>Est. Sales Revenue</h4>
-              <div class="stat-value" id="stat-revenue">₹0</div>
+              <h4 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Est. Sales Revenue</h4>
+              <div class="stat-value" id="stat-revenue" style="font-size: 1.6rem; font-weight: 700; color: var(--text-main);">₹0</div>
+              <div style="font-size: 0.75rem; color: #6366f1; margin-top: 0.2rem;"><i class="fa-solid fa-chart-line"></i> Total Fulfillment</div>
             </div>
           </div>
-          <div class="stat-card">
-            <div class="stat-icon" style="background: rgba(59,130,246,0.15); color: #3b82f6;"><i class="fa-solid fa-envelope"></i></div>
+
+          <div class="stat-card" style="display: flex; align-items: center; gap: 1.25rem; padding: 1.5rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px;">
+            <div class="stat-icon" style="width: 52px; height: 52px; border-radius: 12px; background: rgba(59, 130, 246, 0.15); color: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
             <div class="stat-info">
-              <h4>Inquiries</h4>
-              <div class="stat-value" id="stat-messages-count">0</div>
+              <h4 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.25rem;">Customer Inquiries</h4>
+              <div class="stat-value" id="stat-messages-count" style="font-size: 1.6rem; font-weight: 700; color: var(--text-main);">0</div>
+              <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.2rem;"><i class="fa-solid fa-comments"></i> Store Submissions</div>
             </div>
           </div>
         </div>
 
         <div class="data-card">
-          <div class="card-header">
-            <h3>Recent Orders</h3>
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h3><i class="fa-solid fa-clock-rotate-left" style="color: var(--primary);"></i> Recent Customer Orders</h3>
           </div>
           <div class="table-responsive">
             <table>
@@ -157,16 +218,24 @@
             </button>
           </div>
           
-          <div style="margin-bottom: 1.25rem; display: flex; gap: 1rem;">
-            <input type="text" id="product-search-input" class="form-control" placeholder="Search product name, ID, or category..." style="max-width: 350px;">
+          <div style="margin-bottom: 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <input type="text" id="product-search-input" class="form-control" placeholder="Search product name, category, or collection..." style="max-width: 350px;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="products" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
           </div>
 
           <div class="table-responsive">
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Name</th>
+                  <th>Product Name</th>
                   <th>Gender</th>
                   <th>Category</th>
                   <th>Price</th>
@@ -175,18 +244,36 @@
                 </tr>
               </thead>
               <tbody id="products-table-body">
-                <tr><td colspan="7" style="text-align:center;">Loading products...</td></tr>
+                <tr><td colspan="6" style="text-align:center;">Loading products...</td></tr>
               </tbody>
             </table>
           </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="products" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="products" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+
         </div>
       </div>
 
       <!-- ORDERS TAB -->
       <div id="tab-content-orders" class="tab-pane" style="display: none;">
         <div class="data-card">
-          <div class="card-header">
-            <h3>Customer Orders Management</h3>
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+            <h3><i class="fa-solid fa-cart-shopping" style="color: var(--primary);"></i> Customer Orders Management</h3>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="orders" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
           </div>
           <div class="table-responsive">
             <table>
@@ -205,14 +292,31 @@
               </tbody>
             </table>
           </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="orders" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="orders" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
         </div>
       </div>
 
       <!-- CONTACT MESSAGES TAB -->
       <div id="tab-content-contact" class="tab-pane" style="display: none;">
         <div class="data-card">
-          <div class="card-header">
-            <h3>Customer Inquiries & Feedback</h3>
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.25rem;">
+            <h3><i class="fa-solid fa-comments" style="color: var(--primary);"></i> Customer Inquiries & Feedback</h3>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="contact" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
           </div>
           <div class="table-responsive">
             <table>
@@ -230,120 +334,474 @@
               </tbody>
             </table>
           </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="contact" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="contact" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1. GENDER TYPES TAB -->
+      <div id="tab-content-attr-gender" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3><i class="fa-solid fa-venus-mars" style="color: var(--primary);"></i> Gender & Category Types</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Manage main target department options (e.g. Men, Women, Kids, Sandals)</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="attr-gender" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
+          </div>
+          <form class="attr-add-form" data-type="gender" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 480px;">
+            <input type="text" class="form-control attr-input" placeholder="Add new gender type e.g. Unisex, Teens..." required>
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0.75rem 1.25rem; white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Gender</button>
+          </form>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">#</th>
+                  <th>Gender / Category Type Name</th>
+                  <th>Created Date</th>
+                  <th style="width: 120px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attr-table-gender">
+                <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="attr-gender" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="attr-gender" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. CATEGORY NAMES TAB -->
+      <div id="tab-content-attr-category" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3><i class="fa-solid fa-tags" style="color: var(--primary);"></i> Category Names</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Manage apparel and product classification categories (e.g. Shirts, Kurtis, Jeans)</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="attr-category" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
+          </div>
+          <form class="attr-add-form" data-type="category" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 480px;">
+            <input type="text" class="form-control attr-input" placeholder="Add new category e.g. Blazers, Activewear..." required>
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0.75rem 1.25rem; white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Category</button>
+          </form>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">#</th>
+                  <th>Category Name</th>
+                  <th>Created Date</th>
+                  <th style="width: 120px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attr-table-category">
+                <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="attr-category" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="attr-category" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. COLLECTIONS TAB -->
+      <div id="tab-content-attr-collection" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3><i class="fa-solid fa-layer-group" style="color: var(--primary);"></i> Collections</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Manage seasonal collections and style lines (e.g. Modern Classics, Summer Trends)</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="attr-collection" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
+          </div>
+          <form class="attr-add-form" data-type="collection" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 480px;">
+            <input type="text" class="form-control attr-input" placeholder="Add new collection e.g. Winter Essentials..." required>
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0.75rem 1.25rem; white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Collection</button>
+          </form>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">#</th>
+                  <th>Collection Name</th>
+                  <th>Created Date</th>
+                  <th style="width: 120px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attr-table-collection">
+                <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="attr-collection" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="attr-collection" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. SIZES TAB -->
+      <div id="tab-content-attr-size" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3><i class="fa-solid fa-ruler-combined" style="color: var(--primary);"></i> Sizes</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Manage apparel size options (e.g. S, M, L, XL, 28, 30, 32)</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="attr-size" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
+          </div>
+          <form class="attr-add-form" data-type="size" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 480px;">
+            <input type="text" class="form-control attr-input" placeholder="Add new size option e.g. XXXL, 36..." required>
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0.75rem 1.25rem; white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Size</button>
+          </form>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">#</th>
+                  <th>Size Name / Value</th>
+                  <th>Created Date</th>
+                  <th style="width: 120px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attr-table-size">
+                <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="attr-size" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="attr-size" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. COLORS TAB -->
+      <div id="tab-content-attr-color" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3><i class="fa-solid fa-palette" style="color: var(--primary);"></i> Colors</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Manage color palette choices (e.g. Navy, Off-White, Black, Emerald)</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="attr-color" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
+          </div>
+          <form class="attr-add-form" data-type="color" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 480px;">
+            <input type="text" class="form-control attr-input" placeholder="Add new color name e.g. Mustard, Coral..." required>
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0.75rem 1.25rem; white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Color</button>
+          </form>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">#</th>
+                  <th>Color Name</th>
+                  <th>Created Date</th>
+                  <th style="width: 120px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attr-table-color">
+                <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="attr-color" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="attr-color" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. MATERIALS & FABRICS TAB -->
+      <div id="tab-content-attr-material" class="tab-pane" style="display: none;">
+        <div class="data-card">
+          <div class="card-header" style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div>
+              <h3><i class="fa-solid fa-feather-pointed" style="color: var(--primary);"></i> Material & Fabric</h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.25rem;">Manage fabric composition details (e.g. 100% Organic Cotton, Pure Linen, Denim)</p>
+            </div>
+            <div style="display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.03); padding: 0.35rem 0.75rem; border-radius: 8px; border: 1px solid var(--border-color);">
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">Show</span>
+              <select class="page-limit-select" data-table="attr-material" style="width: auto; padding: 0.35rem 0.65rem; font-size: 0.85rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-main); cursor: pointer;">
+                <option value="10" selected>10</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+              </select>
+              <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 500;">entries</span>
+            </div>
+          </div>
+          <form class="attr-add-form" data-type="material" style="display: flex; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 480px;">
+            <input type="text" class="form-control attr-input" placeholder="Add new material composition e.g. Velvet..." required>
+            <button type="submit" class="btn-primary" style="width: auto; padding: 0.75rem 1.25rem; white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Material</button>
+          </form>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">#</th>
+                  <th>Material & Fabric Name</th>
+                  <th>Created Date</th>
+                  <th style="width: 120px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="attr-table-material">
+                <tr><td colspan="4" style="text-align:center;">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAGINATION FOOTER -->
+          <div class="pagination-footer" style="display: flex; justify-content: space-between; align-items: center; padding-top: 1.25rem; margin-top: 1rem; border-top: 1px solid var(--border-color); flex-wrap: wrap; gap: 1rem;">
+            <div class="pagination-info" data-table="attr-material" style="font-size: 0.85rem; color: var(--text-muted);">
+              Showing 0 to 0 of 0 entries
+            </div>
+            <div class="pagination-controls" data-table="attr-material" style="display: flex; gap: 0.35rem; align-items: center;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD / EDIT PRODUCT FULL-PAGE TAB -->
+      <div id="tab-content-add-product" class="tab-pane" style="display: none;">
+
+        <div class="data-card" style="padding: 2rem;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-color);">
+            <div>
+              <h3 id="page-product-title" style="font-size: 1.35rem; color: var(--text-main); margin-bottom: 0.25rem;">
+                <i class="fa-solid fa-box-archive" style="color: var(--primary); margin-right: 0.5rem;"></i> Add New Product
+              </h3>
+              <p style="color: var(--text-muted); font-size: 0.85rem;">Fill out product specifications, catalog attributes, and media files.</p>
+            </div>
+            <button type="button" class="btn-secondary nav-to-products" style="width: auto; padding: 0.6rem 1.25rem; font-size: 0.85rem;">
+              <i class="fa-solid fa-arrow-left"></i> Back to Products Inventory
+            </button>
+          </div>
+
+          <form id="product-form">
+            <input type="hidden" id="prod-is-edit" value="false">
+            <input type="hidden" id="prod-id">
+
+            <!-- SECTION 1: BASIC INFORMATION -->
+            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+              <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-info-circle"></i> 1. Basic Information
+              </h4>
+
+              <div class="form-group" style="margin-bottom: 1.25rem;">
+                <label for="prod-name">Product Title / Name</label>
+                <input type="text" id="prod-name" class="form-control" placeholder="e.g. Classic Linen Casual Shirt" required>
+              </div>
+
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="prod-gender">Gender / Target Department</label>
+                  <select id="prod-gender" class="form-control" required></select>
+                </div>
+                <div class="form-group">
+                  <label for="prod-category">Category Name</label>
+                  <select id="prod-category" class="form-control"></select>
+                </div>
+              </div>
+
+              <div class="grid-2" style="margin-top: 1rem;">
+                <div class="form-group">
+                  <label for="prod-price">Price (₹ INR)</label>
+                  <input type="number" id="prod-price" class="form-control" placeholder="1999" required min="0">
+                </div>
+                <div class="form-group">
+                  <label for="prod-collection">Collection / Season Line</label>
+                  <select id="prod-collection" class="form-control"></select>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 2: ATTRIBUTES & VARIANTS -->
+            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+              <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-sliders"></i> 2. Attributes & Variant Selection
+              </h4>
+
+              <div class="grid-2">
+                <div class="form-group">
+                  <label for="prod-sizes">Sizes (Click options to select or type comma-separated)</label>
+                  <div id="prod-sizes-chips" class="attr-chips-container" style="margin-bottom: 0.5rem; min-height: 42px;"></div>
+                  <input type="text" id="prod-sizes" class="form-control" placeholder="S, M, L, XL">
+                </div>
+                <div class="form-group">
+                  <label for="prod-colors">Colors (Click options to select or type comma-separated)</label>
+                  <div id="prod-colors-chips" class="attr-chips-container" style="margin-bottom: 0.5rem; min-height: 42px;"></div>
+                  <input type="text" id="prod-colors" class="form-control" placeholder="Navy, Off-White">
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-top: 1rem;">
+                <label for="prod-material">Material & Fabric Composition</label>
+                <select id="prod-material" class="form-control"></select>
+              </div>
+            </div>
+
+            <!-- SECTION 3: MEDIA ASSETS & UPLOAD -->
+            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+              <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-images"></i> 3. Media Assets & File Upload
+              </h4>
+
+              <div class="form-group">
+                <label for="prod-images">Image / Video File Paths (Comma-separated relative URLs)</label>
+                <input type="text" id="prod-images" class="form-control" placeholder="assets/images/men/s1.webp, assets/images/men/s2.webp" required>
+              </div>
+
+              <!-- File Upload Card -->
+              <div class="form-group" style="background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.15);">
+                <label style="color: var(--primary); font-weight: 600; display: block; margin-bottom: 0.5rem;">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Upload Media File to Server
+                </label>
+                <div style="display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;">
+                  <input type="file" id="manual-file-input" accept="image/*,video/*" class="form-control" style="max-width: 320px; padding: 0.4rem;">
+                  <button type="button" id="upload-file-btn" class="btn-secondary" style="width: auto; padding: 0.55rem 1.25rem; font-size: 0.85rem;">
+                    <i class="fa-solid fa-upload"></i> Upload Asset
+                  </button>
+                  <span id="upload-status-text" style="font-size: 0.85rem; color: #a1a1aa;"></span>
+                </div>
+              </div>
+
+              <!-- Media Preview Area -->
+              <div id="media-preview-container" class="form-group" style="display: none; background: rgba(0,0,0,0.3); padding: 1rem; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                <label style="color: var(--primary); font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 0.5rem;">
+                  <i class="fa-solid fa-eye"></i> Live Media Preview
+                </label>
+                <div id="media-preview-grid" style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;"></div>
+              </div>
+            </div>
+
+            <!-- SECTION 4: DESCRIPTION & PUBLISHING -->
+            <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 2rem;">
+              <h4 style="color: var(--primary); font-size: 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+                <i class="fa-solid fa-file-lines"></i> 4. Description & Visibility
+              </h4>
+
+              <div class="form-group">
+                <label for="prod-description">Product Description</label>
+                <textarea id="prod-description" class="form-control" style="min-height: 120px;" placeholder="Describe key product features, fabric feel, fit guide, and styling tips..."></textarea>
+              </div>
+
+              <div class="grid-2">
+                <div class="form-group" style="display:flex; align-items:center; gap:0.6rem;">
+                  <input type="checkbox" id="prod-featured" style="width: 20px; height: 20px; cursor: pointer;">
+                  <label for="prod-featured" style="margin:0; cursor:pointer; font-weight: 500;">Feature on Store Homepage</label>
+                </div>
+                <div class="form-group" style="display:flex; align-items:center; gap:0.6rem;">
+                  <input type="checkbox" id="prod-newArrival" style="width: 20px; height: 20px; cursor: pointer;">
+                  <label for="prod-newArrival" style="margin:0; cursor:pointer; font-weight: 500;">Tag as New Arrival</label>
+                </div>
+              </div>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div style="display:flex; justify-content:flex-end; gap:1rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+              <button type="button" class="btn-secondary nav-to-products" style="padding: 0.75rem 1.5rem;">Cancel</button>
+              <button type="submit" class="btn-primary" style="width:auto; padding:0.75rem 2rem; font-size: 0.95rem; font-weight: 600;">
+                <i class="fa-solid fa-check"></i> Save Product
+              </button>
+            </div>
+          </form>
+
         </div>
       </div>
 
     </main>
   </div>
 
-  <!-- ADD / EDIT PRODUCT MODAL -->
-  <div id="product-modal" class="modal-backdrop" style="display: none;">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 id="modal-product-title">Add New Product</h3>
-        <button id="close-product-modal" class="modal-close">&times;</button>
+
+  <!-- CUSTOM DELETE CONFIRMATION POPUP MODAL -->
+  <div id="confirm-modal" class="modal-backdrop" style="display: none;">
+    <div class="modal-content" style="max-width: 420px; text-align: center; padding: 2.25rem 2rem;">
+      <div style="width: 58px; height: 58px; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem auto;">
+        <i class="fa-solid fa-trash" style="font-size: 1.5rem; color: var(--danger);"></i>
       </div>
+      <h3 id="confirm-modal-title" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-main);">Confirm Deletion</h3>
+      <p id="confirm-modal-message" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1.75rem; line-height: 1.5;">Are you sure you want to remove this option? This action cannot be undone.</p>
       
-      <form id="product-form">
-        <input type="hidden" id="prod-is-edit" value="false">
-        
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="prod-id">Product Code / ID</label>
-            <input type="text" id="prod-id" class="form-control" placeholder="e.g. FR-MEN-07" required>
-          </div>
-          <div class="form-group">
-            <label for="prod-name">Product Name</label>
-            <input type="text" id="prod-name" class="form-control" placeholder="e.g. Classic Linen Shirt" required>
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="prod-gender">Gender / Category Type</label>
-            <select id="prod-gender" class="form-control" required>
-              <option value="men">Men</option>
-              <option value="women">Women</option>
-              <option value="kids">Kids</option>
-              <option value="sandals">Footwear / Sandals</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="prod-category">Category Name</label>
-            <input type="text" id="prod-category" class="form-control" placeholder="e.g. Shirts, Kurtis, Boys">
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="prod-price">Price (₹)</label>
-            <input type="number" id="prod-price" class="form-control" placeholder="1999" required min="0">
-          </div>
-          <div class="form-group">
-            <label for="prod-collection">Collection</label>
-            <input type="text" id="prod-collection" class="form-control" placeholder="Modern Classics, Casual Wear">
-          </div>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group">
-            <label for="prod-sizes">Sizes (comma separated)</label>
-            <input type="text" id="prod-sizes" class="form-control" placeholder="S, M, L, XL">
-          </div>
-          <div class="form-group">
-            <label for="prod-colors">Colors (comma separated)</label>
-            <input type="text" id="prod-colors" class="form-control" placeholder="Navy, Off-White">
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="prod-material">Material & Fabric</label>
-          <input type="text" id="prod-material" class="form-control" placeholder="100% Pure Organic Cotton">
-        </div>
-
-        <div class="form-group">
-          <label for="prod-images">Image / Video Asset Paths (comma separated)</label>
-          <input type="text" id="prod-images" class="form-control" placeholder="assets/images/men/s1.webp" required>
-        </div>
-
-        <!-- Manual File Upload (Images & Videos) -->
-        <div class="form-group" style="background: rgba(255,255,255,0.03); padding: 0.85rem; border-radius: 8px; border: 1px dashed rgba(255,255,255,0.15);">
-          <label style="color: var(--primary); font-weight: 600; display: block; margin-bottom: 0.4rem;">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Upload Media File Manually (Image / Video)
-          </label>
-          <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
-            <input type="file" id="manual-file-input" accept="image/*,video/*" class="form-control" style="max-width: 280px; padding: 0.4rem;">
-            <button type="button" id="upload-file-btn" class="btn-secondary" style="width: auto; padding: 0.5rem 1rem; font-size: 0.85rem;">
-              <i class="fa-solid fa-upload"></i> Upload to Server
-            </button>
-            <span id="upload-status-text" style="font-size: 0.85rem; color: #a1a1aa;"></span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="prod-description">Product Description</label>
-          <textarea id="prod-description" class="form-control" placeholder="Enter product features and description..."></textarea>
-        </div>
-
-        <div class="grid-2">
-          <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-top:0.5rem;">
-            <input type="checkbox" id="prod-featured" style="width: 18px; height: 18px;">
-            <label for="prod-featured" style="margin:0; cursor:pointer;">Featured Product</label>
-          </div>
-          <div class="form-group" style="display:flex; align-items:center; gap:0.5rem; margin-top:0.5rem;">
-            <input type="checkbox" id="prod-newArrival" style="width: 18px; height: 18px;">
-            <label for="prod-newArrival" style="margin:0; cursor:pointer;">New Arrival</label>
-          </div>
-        </div>
-
-        <div style="display:flex; justify-content:flex-end; gap:1rem; margin-top:1.5rem;">
-          <button type="button" id="cancel-product-btn" class="btn-secondary">Cancel</button>
-          <button type="submit" class="btn-primary" style="width:auto; padding:0.75rem 1.5rem;">Save Product</button>
-        </div>
-      </form>
+      <div style="display: flex; gap: 0.75rem; justify-content: center;">
+        <button id="confirm-cancel-btn" class="btn-secondary" style="flex: 1; padding: 0.75rem; font-weight: 600;">Cancel</button>
+        <button id="confirm-ok-btn" class="btn-danger" style="flex: 1; padding: 0.75rem; font-size: 0.9rem; font-weight: 600;"><i class="fa-solid fa-trash"></i> Delete Option</button>
+      </div>
     </div>
   </div>
 
   <script src="js/admin.js"></script>
 </body>
 </html>
+

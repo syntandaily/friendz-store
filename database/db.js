@@ -260,12 +260,93 @@ async function initSchema() {
     );
   `;
 
+  const attributesSql = isMySQL ? `
+    CREATE TABLE IF NOT EXISTS product_attributes (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      type VARCHAR(50) NOT NULL,
+      name VARCHAR(255) NOT NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+  ` : `
+    CREATE TABLE IF NOT EXISTS product_attributes (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      type TEXT NOT NULL,
+      name TEXT NOT NULL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+  `;
+
   await dbQuery.exec(productsSql);
   await dbQuery.exec(ordersSql);
   await dbQuery.exec(orderItemsSql);
   await dbQuery.exec(contactSql);
   await dbQuery.exec(adminsSql);
+  await dbQuery.exec(attributesSql);
+
+  // Auto seed default attributes if table is empty
+  try {
+    const existingCount = await dbQuery.get('SELECT COUNT(*) as count FROM product_attributes');
+    const count = existingCount ? (existingCount.count || existingCount['COUNT(*)'] || 0) : 0;
+    if (parseInt(count) === 0) {
+      console.log('🌱 Seeding initial default product attributes...');
+      const defaultAttributes = [
+        { type: 'gender', name: 'Men' },
+        { type: 'gender', name: 'Women' },
+        { type: 'gender', name: 'Kids' },
+        { type: 'gender', name: 'Footwear / Sandals' },
+        { type: 'category', name: 'Shirts' },
+        { type: 'category', name: 'Kurtis' },
+        { type: 'category', name: 'Trousers & Pants' },
+        { type: 'category', name: 'Dresses & Frocks' },
+        { type: 'category', name: 'T-Shirts & Tops' },
+        { type: 'category', name: 'Jeans' },
+        { type: 'category', name: 'Sarees & Ethnic' },
+        { type: 'category', name: 'Footwear' },
+        { type: 'collection', name: 'Modern Classics' },
+        { type: 'collection', name: 'Casual Wear' },
+        { type: 'collection', name: 'Festive Collection' },
+        { type: 'collection', name: 'Summer Trends' },
+        { type: 'collection', name: 'Workwear / Formal' },
+        { type: 'size', name: 'S' },
+        { type: 'size', name: 'M' },
+        { type: 'size', name: 'L' },
+        { type: 'size', name: 'XL' },
+        { type: 'size', name: 'XXL' },
+        { type: 'size', name: '28' },
+        { type: 'size', name: '30' },
+        { type: 'size', name: '32' },
+        { type: 'size', name: '34' },
+        { type: 'color', name: 'Navy' },
+        { type: 'color', name: 'Off-White' },
+        { type: 'color', name: 'Black' },
+        { type: 'color', name: 'White' },
+        { type: 'color', name: 'Red' },
+        { type: 'color', name: 'Blue' },
+        { type: 'color', name: 'Green' },
+        { type: 'color', name: 'Beige' },
+        { type: 'color', name: 'Maroon' },
+        { type: 'material', name: '100% Pure Organic Cotton' },
+        { type: 'material', name: 'Pure Linen' },
+        { type: 'material', name: 'Silk Blend' },
+        { type: 'material', name: 'Denim' },
+        { type: 'material', name: 'Rayon' },
+        { type: 'material', name: 'Polyester Blend' }
+      ];
+
+      for (const attr of defaultAttributes) {
+        const existing = await dbQuery.get('SELECT id FROM product_attributes WHERE type = ? AND name = ?', [attr.type, attr.name]);
+        if (!existing) {
+          await dbQuery.run('INSERT INTO product_attributes (type, name) VALUES (?, ?)', [attr.type, attr.name]);
+        }
+      }
+      console.log('✅ Seeded default product attributes.');
+    }
+
+  } catch (err) {
+    console.error('Error seeding default product attributes:', err);
+  }
 }
+
 
 // Auto init schema on load
 initSchema().catch(err => console.error('Database Schema Initialization Error:', err));
