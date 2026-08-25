@@ -387,17 +387,49 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
   position: fixed;
   top: 0;
   right: -100%;
-  width: 100%;
-  max-width: 400px;
+  width: min(85vw, 360px);
   height: 100vh;
+  height: 100dvh;
   background-color: var(--bg-primary);
   z-index: 1050;
-  padding: 8rem 3rem 3rem 3rem;
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.05);
+  padding: 0 0 2rem 0;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   transition: var(--transition-slow);
+  overflow-y: auto;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.mobile-drawer-logo {
+  font-family: 'Norwester', Impact, sans-serif;
+  font-size: 1.35rem;
+  letter-spacing: 0.1em;
+  color: var(--text-primary);
+}
+
+.drawer-close-btn {
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.drawer-close-btn:hover {
+  transform: scale(1.15);
+  color: var(--text-secondary);
 }
 
 .mobile-drawer.open {
@@ -407,12 +439,13 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 .mobile-nav-links {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
+  padding: 2rem 1.5rem 1rem 1.5rem;
 }
 
 .mobile-nav-link {
   font-family: var(--font-editorial);
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   font-weight: 400;
   color: var(--text-primary);
   display: block;
@@ -424,7 +457,7 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 
 .mobile-drawer-footer {
   border-top: 1px solid var(--border-color);
-  padding-top: 2rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
 }
 
 .mobile-drawer-info {

@@ -89,16 +89,18 @@ const HeaderManager = (() => {
 
 // --- MOBILE DRAWERS ---
 const MobileMenu = (() => {
-  let menuBtn, mobileDrawer, backdrop;
+  let menuBtn, mobileDrawer, backdrop, closeBtn;
 
   function init() {
     menuBtn = document.querySelector('.menu-btn');
     mobileDrawer = document.querySelector('.mobile-drawer');
     backdrop = document.querySelector('.drawer-backdrop');
+    closeBtn = document.querySelector('.drawer-close-btn');
 
-    if (!menuBtn) return;
+    if (!mobileDrawer) return;
 
-    menuBtn.addEventListener('click', toggle);
+    if (menuBtn) menuBtn.addEventListener('click', toggle);
+    if (closeBtn) closeBtn.addEventListener('click', close);
     if (backdrop) backdrop.addEventListener('click', close);
     
     // Close drawer on clicking mobile links
@@ -116,14 +118,14 @@ const MobileMenu = (() => {
   }
 
   function open() {
-    menuBtn.classList.add('active');
+    if (menuBtn) menuBtn.classList.add('active');
     mobileDrawer.classList.add('open');
     if (backdrop) backdrop.classList.add('active');
     document.body.classList.add('modal-open');
   }
 
   function close() {
-    menuBtn.classList.remove('active');
+    if (menuBtn) menuBtn.classList.remove('active');
     mobileDrawer.classList.remove('open');
     if (backdrop) backdrop.classList.remove('active');
     document.body.classList.remove('modal-open');

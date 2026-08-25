@@ -270,7 +270,33 @@ document.addEventListener('DOMContentLoaded', () => {
     contact: { title: 'Customer Inquiries', subtitle: 'Customer feedback and submitted forms' }
   };
 
+  // ADMIN MOBILE SIDEBAR TOGGLE
+  const sidebarToggleBtn = document.getElementById('admin-sidebar-toggle');
+  const sidebarEl = document.querySelector('.sidebar');
+  const sidebarBackdropEl = document.getElementById('admin-sidebar-backdrop');
+
+  function toggleAdminSidebar() {
+    if (!sidebarEl) return;
+    sidebarEl.classList.toggle('active');
+    if (sidebarBackdropEl) sidebarBackdropEl.classList.toggle('active');
+  }
+
+  function closeAdminSidebar() {
+    if (!sidebarEl) return;
+    sidebarEl.classList.remove('active');
+    if (sidebarBackdropEl) sidebarBackdropEl.classList.remove('active');
+  }
+
+  if (sidebarToggleBtn) {
+    sidebarToggleBtn.addEventListener('click', toggleAdminSidebar);
+  }
+  if (sidebarBackdropEl) {
+    sidebarBackdropEl.addEventListener('click', closeAdminSidebar);
+  }
+
   function switchTab(targetTab) {
+    closeAdminSidebar();
+
     navLinks.forEach(l => {
       l.classList.toggle('active', l.dataset.tab === targetTab);
     });

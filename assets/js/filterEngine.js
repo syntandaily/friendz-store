@@ -114,6 +114,16 @@ const FilterEngine = (() => {
 
     // Initial render
     applyFilters();
+
+    // Listen for dynamic product updates from backend
+    document.addEventListener('friendz:products-updated', (e) => {
+      if (currentPageType === "all") {
+        originalProducts = [...e.detail];
+      } else {
+        originalProducts = e.detail.filter(p => p.gender === currentPageType);
+      }
+      applyFilters();
+    });
   }
 
   function attachEventListeners() {

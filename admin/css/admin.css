@@ -499,3 +499,141 @@ tr:hover td {
   color: var(--danger);
 }
 
+/* --- ADMIN MOBILE RESPONSIVE STYLES --- */
+.admin-mobile-header {
+  display: none;
+}
+
+.admin-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: var(--transition);
+}
+
+.admin-sidebar-backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .admin-mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 1.25rem;
+    z-index: 1030;
+    backdrop-filter: blur(12px);
+  }
+
+  #admin-sidebar-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .admin-mobile-logo {
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 270px;
+    height: 100vh;
+    height: 100dvh;
+    z-index: 1050;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+    background: #0d1322;
+  }
+
+  .sidebar.active, .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 1.25rem;
+    margin-top: 56px;
+    width: 100%;
+  }
+
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+
+  .login-card {
+    padding: 1.5rem;
+  }
+
+  .pagination-container {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+}
+
