@@ -117,21 +117,21 @@
   .hero {
     height: auto;
     min-height: 0;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 1672 / 850;
     margin-top: var(--header-height);
   }
 
   .hero-indicators {
     gap: 1.5rem;
-    bottom: 3rem;
+    bottom: 1.5rem;
   }
 
   .hero-shop-now {
-    left: 1.25rem;
-    bottom: 5.5rem;
-    min-width: 154px;
-    padding: 13px 20px;
-    font-size: .7rem;
+    left: 1rem;
+    bottom: 1rem;
+    min-width: 120px;
+    padding: 8px 16px;
+    font-size: .65rem;
   }
   
   .hero-indicator-btn {
@@ -591,13 +591,15 @@
 /* Final compact mobile header override. Kept last to win over all earlier breakpoints. */
 @media (max-width: 768px) {
   :root { --header-height: 48px !important; }
-  .header { height: 48px !important; }
+  .header, .header.scrolled { height: 48px !important; background-color: #ffffff !important; background: #ffffff !important; }
   .header-container { min-height: 48px; }
   .logo { min-height: 40px !important; padding: 3px 0 0 46px !important; font-size: 1rem !important; }
   .logo::before { width: 36px !important; height: 36px !important; }
   .logo span { left: 46px !important; bottom: -6px !important; font-size: .38rem !important; }
   .menu-btn { width: 19px !important; height: 13px !important; }
-  .hero { height: auto !important; min-height: 0 !important; aspect-ratio: 3 / 4 !important; max-height: 60vh !important; margin-top: 48px !important; }
+  .hero { height: auto !important; min-height: 0 !important; aspect-ratio: 1672 / 850 !important; max-height: none !important; margin-top: 48px !important; }
+  .hero-slide img { object-fit: cover !important; object-position: center center !important; }
+  .hero-shop-now { left: 1rem !important; bottom: 0.85rem !important; min-width: 110px !important; padding: 7px 14px !important; font-size: 0.62rem !important; }
   .checkout-page { padding-top: calc(48px + 3rem); }
   .checkout-grid { grid-template-columns: 1fr; gap: 1rem; }
   .checkout-card { padding: 1.25rem; }

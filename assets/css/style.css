@@ -182,9 +182,9 @@ a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible
 }
 
 .header.scrolled {
-  background-color: rgba(255, 255, 255, 0.98);
+  background-color: #ffffff;
   height: 70px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -2207,8 +2207,7 @@ body.women-page {
 }
 
 body.women-page .header {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(10px);
+  background: #ffffff;
 }
 
 body.women-page .nav-link:hover,
