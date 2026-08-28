@@ -598,7 +598,8 @@
   .logo span { left: 46px !important; bottom: -6px !important; font-size: .38rem !important; }
   .menu-btn { width: 19px !important; height: 13px !important; }
   .hero { height: auto !important; min-height: 0 !important; aspect-ratio: 1672 / 850 !important; max-height: none !important; margin-top: 48px !important; }
-  .hero-slide img { object-fit: cover !important; object-position: center center !important; }
+  .hero-slide img { object-fit: cover !important; object-position: top center !important; }
+  .category-card > img { object-fit: cover !important; object-position: top center !important; }
   .hero-shop-now { left: 1rem !important; bottom: 0.85rem !important; min-width: 110px !important; padding: 7px 14px !important; font-size: 0.62rem !important; }
   .checkout-page { padding-top: calc(48px + 3rem); }
   .checkout-grid { grid-template-columns: 1fr; gap: 1rem; }
